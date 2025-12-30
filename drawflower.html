@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Different Flower Shapes</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Times New Roman, sans-serif;
+      background:FloralWhite;
+      color: rgb(193, 104, 203);
+    }
+
+    canvas {
+      border: 2px solid #333;
+      background-color: white;
+      cursor: crosshair;
+    }
+  </style>
+</head>
+
+
+<body>
+
+  <h2>🌸 Click Anywhere to Draw a Random Flower 🌸</h2>
+  <h3> (BTW these are definitely not flowers if you ask me) <h3>
+  <canvas id="canvas" width="700" height="450"></canvas>
+
+  <script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+
+    canvas.addEventListener("click", (event) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+
+      const type = Math.floor(Math.random() * 4);
+      drawFlower(x, y, type);
+    });
+
+    function drawFlower(x, y, type) {
+      switch (type) {
+        case 0:
+          drawDaisy(x, y);
+          break;
+        case 1:
+          drawTulip(x, y);
+          break;
+        case 2:
+          drawRose(x, y);
+          break;
+        case 3:
+          drawSunflower(x, y);
+          break;
+      }
+    }
+
+    function drawDaisy(x, y) {
+      for (let i = 0; i < 10; i++) {
+        ctx.beginPath();
+        ctx.fillStyle = "white";
+        ctx.ellipse(x, y - 20, 8, 22, i * (Math.PI / 5), 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      ctx.beginPath();
+      ctx.fillStyle = "yellow";
+      ctx.arc(x, y, 10, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    function drawTulip(x, y) {
+      ctx.fillStyle = "pink";
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.bezierCurveTo(x - 20, y - 30, x - 10, y - 60, x, y - 40);
+      ctx.bezierCurveTo(x + 10, y - 60, x + 20, y - 30, x, y);
+      ctx.fill();
+    }
+
+    function drawRose(x, y) {
+      ctx.strokeStyle = "red";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+
+      let angle = 0;
+      let radius = 0;
+
+      while (radius < 20) {
+        const px = x + radius * Math.cos(angle);
+        const py = y + radius * Math.sin(angle);
+        ctx.lineTo(px, py);
+        angle += 0.3;
+        radius += 0.15;
+      }
+
+      ctx.stroke();
+    }
+
+    function drawSunflower(x, y) {
+      for (let i = 0; i < 12; i++) {
+        ctx.beginPath();
+        ctx.fillStyle = "orange";
+        ctx.ellipse(x, y - 25, 10, 30, i * (Math.PI / 6), 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      ctx.beginPath();
+      ctx.fillStyle = "brown";
+      ctx.arc(x, y, 12, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  </script>
+<br>
+<br>
+
+<a style= "font: Times New Roman; color:rgb(193, 104, 203); font-size:140%; text-align: center" href="index.html"> Click to go Back </a>
+<br>
+<br>
+<a style= "color:rgb(193, 104, 203);font: Times New Roman; font-size:140%; text-align: center" href="poenies.html"> Real flowers? aka pinterest </a>
+
+
+<p style="color:rgb(193, 104, 203); font-size:100%; text-align: center"> Sorry for the low budget <q> flowers </q> babe <br>
+By the next time you are sick maybe it will improve give me some time</p>
+</body>
+</html>
